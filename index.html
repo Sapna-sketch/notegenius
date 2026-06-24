@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="NoteGenius - AI Study Notes Generator. Convert long lectures, articles, and textbook chapters into clean, structured notes, summaries, and key points.">
+    <title>NoteGenius | AI Study Notes Generator</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome for Premium Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body class="light-theme">
+    
+    <!-- Toast Notifications -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <!-- Navigation Header -->
+    <header class="main-header">
+        <div class="header-container">
+            <a href="#" class="logo-link" id="nav-logo">
+                <div class="logo-icon">
+                    <i class="fa-solid fa-brain-circuit"></i>
+                </div>
+                <span class="logo-text">Note<span>Genius</span></span>
+            </a>
+            
+            <nav class="nav-menu">
+                <a href="#" class="nav-item active" id="nav-link-home"><i class="fa-solid fa-house"></i> Home</a>
+                <a href="#" class="nav-item" id="nav-link-generator"><i class="fa-solid fa-wand-magic-sparkles"></i> Generator</a>
+                <a href="#" class="nav-item" id="nav-link-saved"><i class="fa-solid fa-folder-bookmark"></i> My Notes</a>
+            </nav>
+            
+            <div class="header-actions">
+                <button class="theme-toggle-btn" id="theme-toggle-btn" aria-label="Toggle Theme">
+                    <i class="fa-solid fa-moon moon-icon"></i>
+                    <i class="fa-solid fa-sun sun-icon"></i>
+                </button>
+                <button class="btn btn-primary btn-header" id="btn-header-get-started">Get Started</button>
+            </div>
+            
+            <!-- Mobile Menu Toggle -->
+            <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Toggle Navigation Menu">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Drawer Navigation -->
+    <div class="mobile-drawer" id="mobile-drawer">
+        <div class="drawer-header">
+            <span class="logo-text">Note<span>Genius</span></span>
+            <button class="drawer-close-btn" id="drawer-close-btn"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="drawer-nav">
+            <a href="#" class="drawer-item" id="drawer-link-home"><i class="fa-solid fa-house"></i> Home</a>
+            <a href="#" class="drawer-item" id="drawer-link-generator"><i class="fa-solid fa-wand-magic-sparkles"></i> Generator</a>
+            <a href="#" class="drawer-item" id="drawer-link-saved"><i class="fa-solid fa-folder-bookmark"></i> My Notes</a>
+        </div>
+    </div>
+    <div class="drawer-overlay" id="drawer-overlay"></div>
+
+    <!-- Main Content Container -->
+    <main class="main-content">
+        
+        <!-- SECTION 1: HOME PAGE / LANDING PAGE -->
+        <section id="home-section" class="view-section active-view">
+            <!-- Hero Banner -->
+            <div class="hero-container">
+                <div class="hero-content">
+                    <div class="badge"><i class="fa-solid fa-sparkles"></i> Next-Gen Student Tool</div>
+                    <h1 class="hero-title">Supercharge Your Study Sessions with AI Notes</h1>
+                    <p class="hero-subtitle">Transform long, tedious textbook chapters, cluttered lectures, and complex articles into beautifully structured notes, concise key points, and summaries in seconds.</p>
+                    <div class="hero-cta-group">
+                        <button class="btn btn-primary btn-lg" id="btn-hero-cta">
+                            Generate Notes <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                        <button class="btn btn-secondary btn-lg" id="btn-hero-saved">
+                            View My Saved Notes
+                        </button>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <div class="floating-dashboard">
+                        <div class="dash-header">
+                            <div class="dots"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+                            <span class="dash-title">NoteGenius Workspace</span>
+                        </div>
+                        <div class="dash-body">
+                            <div class="dash-line-header">### 1. Photosynthesis Overview</div>
+                            <div class="dash-line bullet">- Process used by plants to convert light energy into chemical energy.</div>
+                            <div class="dash-line bullet">- Takes place in the **chloroplasts** of plant cells.</div>
+                            <div class="dash-line bullet">- Requires water, carbon dioxide, and sunlight.</div>
+                            <div class="dash-line-header">### 2. Light-Dependent Reactions</div>
+                            <div class="dash-line bullet">- Solar energy is absorbed by chlorophyll.</div>
+                            <div class="dash-line bullet">- Produces ATP and NADPH.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Features Highlight -->
+            <div class="features-section">
+                <div class="section-header-center">
+                    <h2 class="section-title">Designed for Smarter Studying</h2>
+                    <p class="section-subtitle">NoteGenius provides everything you need to digest study materials efficiently and excel in your courses.</p>
+                </div>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon icon-purple">
+                            <i class="fa-solid fa-indent"></i>
+                        </div>
+                        <h3 class="feature-title">Structured Hierarchies</h3>
+                        <p class="feature-text">AI formats your reading material into nested, readable sections with clear headings and bulleted concepts.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon icon-blue">
+                            <i class="fa-solid fa-bolt"></i>
+                        </div>
+                        <h3 class="feature-title">Key Points Extractor</h3>
+                        <p class="feature-text">Instantly isolate crucial terms, dates, formulas, and definitions from long, complicated paragraphs.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon icon-indigo">
+                            <i class="fa-solid fa-compress"></i>
+                        </div>
+                        <h3 class="feature-title">Concise Summaries</h3>
+                        <p class="feature-text">Get a high-level overview of complex topics to quickly review and reinforce the core concepts before tests.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon icon-teal">
+                            <i class="fa-solid fa-download"></i>
+                        </div>
+                        <h3 class="feature-title">Export Instantly</h3>
+                        <p class="feature-text">Download your generated study resources as clean Text files or fully styled PDFs ready for printing.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- How It Works Section -->
+            <div class="how-it-works-section">
+                <div class="section-header-center">
+                    <h2 class="section-title">How NoteGenius Works</h2>
+                    <p class="section-subtitle">Get studying in three simple steps.</p>
+                </div>
+                <div class="steps-grid">
+                    <div class="step-card">
+                        <div class="step-number">01</div>
+                        <h4 class="step-title">Paste Study Text</h4>
+                        <p class="step-text">Copy paragraphs, transcripts, or articles and paste them directly into the text editor.</p>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-number">02</div>
+                        <h4 class="step-title">Generate Notes</h4>
+                        <p class="step-text">Choose your study settings and trigger our dual-mode NLP/Gemini generation engine.</p>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-number">03</div>
+                        <h4 class="step-title">Study & Save</h4>
+                        <p class="step-text">Read notes organized in tabs, save to your dashboard database, or download for offline revision.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 2: NOTES GENERATOR PAGE -->
+        <section id="generator-section" class="view-section">
+            <div class="generator-container">
+                
+                <!-- Left Input Panel -->
+                <div class="input-panel card">
+                    <div class="panel-header">
+                        <h2><i class="fa-solid fa-file-signature"></i> Study Material Input</h2>
+                        <button class="btn-clear" id="btn-clear-input" title="Clear all text"><i class="fa-solid fa-trash-can"></i> Clear</button>
+                    </div>
+                    <div class="input-group">
+                        <label for="input-note-title" class="input-label">Topic / Title</label>
+                        <input type="text" id="input-note-title" placeholder="e.g. Chapter 4: Photosynthesis in Plants" class="form-control text-input">
+                    </div>
+                    <div class="input-group grow">
+                        <label for="input-study-content" class="input-label">Study Content</label>
+                        <textarea id="input-study-content" placeholder="Paste your study content, textbook pages, lecture notes, or research papers here (at least 50 characters for best results)..." class="form-control textarea-input"></textarea>
+                    </div>
+                    
+                    <!-- Advanced Info / Configuration Accordion -->
+                    <div class="api-status-bar">
+                        <span class="status-indicator" id="status-indicator">
+                            <span class="status-dot"></span>
+                            <span class="status-label">Loading engine status...</span>
+                        </span>
+                        <div class="info-tooltip" title="NoteGenius automatically detects if GEMINI_API_KEY is configured in your backend .env file.">
+                            <i class="fa-solid fa-circle-info"></i>
+                        </div>
+                    </div>
+                    
+                    <button class="btn btn-primary btn-block btn-lg" id="btn-generate-notes">
+                        <span class="normal-state"><i class="fa-solid fa-wand-magic-sparkles"></i> Generate Study Notes</span>
+                        <span class="loading-state"><i class="fa-solid fa-circle-notch fa-spin"></i> Analyzing & Structuring...</span>
+                    </button>
+                </div>
+
+                <!-- Right Output Panel -->
+                <div class="output-panel card" id="output-panel-empty">
+                    <div class="empty-state">
+                        <div class="empty-state-icon">
+                            <i class="fa-solid fa-file-medical"></i>
+                        </div>
+                        <h3>Your Study Workspace</h3>
+                        <p>Paste your study material on the left and click "Generate Study Notes". Your summaries, key items, and organized outlines will appear here instantly!</p>
+                    </div>
+                </div>
+
+                <!-- Active Output Workspace (Hidden by Default) -->
+                <div class="output-panel card active-output" id="output-panel-active" style="display: none;">
+                    <div class="panel-header flex-column">
+                        <div class="output-title-row">
+                            <h2 id="output-note-title-heading">Untitled Study Notes</h2>
+                            <div class="output-badge"><i class="fa-solid fa-sparkles"></i> Generated</div>
+                        </div>
+                        
+                        <!-- Navigation Tabs -->
+                        <div class="output-tabs">
+                            <button class="tab-btn active" data-tab="tab-structured-notes">
+                                <i class="fa-solid fa-list-check"></i> Structured Notes
+                            </button>
+                            <button class="tab-btn" data-tab="tab-key-points">
+                                <i class="fa-solid fa-lightbulb"></i> Key Points
+                            </button>
+                            <button class="tab-btn" data-tab="tab-summary">
+                                <i class="fa-solid fa-compress"></i> Summary
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Tab Contents -->
+                    <div class="tab-viewport">
+                        <!-- Tab 1: Structured Outline -->
+                        <div id="tab-structured-notes" class="tab-pane active">
+                            <div class="rendered-markdown-container markdown-body" id="rendered-structured-notes">
+                                <!-- Markdown generated notes go here -->
+                            </div>
+                        </div>
+
+                        <!-- Tab 2: Key Points -->
+                        <div id="tab-key-points" class="tab-pane">
+                            <div class="rendered-markdown-container markdown-body" id="rendered-key-points">
+                                <!-- Bullet key points go here -->
+                            </div>
+                        </div>
+
+                        <!-- Tab 3: Summary -->
+                        <div id="tab-summary" class="tab-pane">
+                            <div class="summary-card-container">
+                                <p class="summary-paragraph" id="rendered-summary">
+                                    <!-- Summary goes here -->
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Actions Footer -->
+                    <div class="panel-actions-footer">
+                        <div class="left-actions">
+                            <button class="btn btn-secondary" id="btn-save-note">
+                                <i class="fa-solid fa-bookmark"></i> Save to My Notes
+                            </button>
+                        </div>
+                        <div class="right-actions">
+                            <button class="btn btn-text" id="btn-copy-workspace" title="Copy Current View to Clipboard">
+                                <i class="fa-regular fa-copy"></i> Copy Text
+                            </button>
+                            <div class="dropdown-wrapper">
+                                <button class="btn btn-secondary dropdown-trigger" id="btn-download-dropdown">
+                                    <i class="fa-solid fa-download"></i> Download <i class="fa-solid fa-chevron-down"></i>
+                                </button>
+                                <div class="dropdown-menu" id="download-dropdown-menu">
+                                    <button class="dropdown-item" id="btn-download-txt">
+                                        <i class="fa-regular fa-file-lines"></i> Text File (.txt)
+                                    </button>
+                                    <button class="dropdown-item" id="btn-download-pdf">
+                                        <i class="fa-regular fa-file-pdf"></i> PDF Document (.pdf)
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SECTION 3: SAVED NOTES VIEW -->
+        <section id="saved-notes-section" class="view-section">
+            <div class="saved-notes-container">
+                <div class="section-header-row">
+                    <div>
+                        <h2 class="view-title">My Saved Notes</h2>
+                        <p class="view-subtitle">Access your stored summaries, outlines, and reference sheets.</p>
+                    </div>
+                    <div class="search-bar-wrapper">
+                        <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                        <input type="text" id="search-saved-notes" placeholder="Search saved notes..." class="form-control search-input">
+                    </div>
+                </div>
+
+                <!-- Database Loading Spinner -->
+                <div class="saved-notes-loader" id="saved-notes-loader" style="display: none;">
+                    <i class="fa-solid fa-circle-notch fa-spin"></i> Loading saved items...
+                </div>
+
+                <!-- Empty State -->
+                <div class="empty-state card" id="saved-notes-empty" style="display: none;">
+                    <div class="empty-state-icon">
+                        <i class="fa-solid fa-folder-open"></i>
+                    </div>
+                    <h3>No Saved Notes Yet</h3>
+                    <p>Generate study notes and click "Save to My Notes" to build your offline dashboard database collection!</p>
+                    <button class="btn btn-primary" id="btn-empty-saved-cta">Go to Notes Generator</button>
+                </div>
+
+                <!-- Grid List -->
+                <div class="saved-notes-grid" id="saved-notes-grid">
+                    <!-- Cards will be populated dynamically -->
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Detailed Note View Modal -->
+    <div class="modal-overlay" id="note-modal-overlay">
+        <div class="modal-container">
+            <div class="modal-header">
+                <h3 id="modal-note-title">Review Saved Notes</h3>
+                <button class="modal-close-btn" id="btn-close-modal"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            
+            <div class="modal-tabs">
+                <button class="modal-tab-btn active" data-modal-tab="modal-tab-structured">
+                    <i class="fa-solid fa-list-check"></i> Outline
+                </button>
+                <button class="modal-tab-btn" data-modal-tab="modal-tab-key">
+                    <i class="fa-solid fa-lightbulb"></i> Key Points
+                </button>
+                <button class="modal-tab-btn" data-modal-tab="modal-tab-summary">
+                    <i class="fa-solid fa-compress"></i> Summary
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <!-- Modal Tab Content 1: Structured Outline -->
+                <div id="modal-tab-structured" class="modal-tab-pane active">
+                    <div class="rendered-markdown-container markdown-body" id="modal-rendered-structured"></div>
+                </div>
+
+                <!-- Modal Tab Content 2: Key Points -->
+                <div id="modal-tab-key" class="modal-tab-pane">
+                    <div class="rendered-markdown-container markdown-body" id="modal-rendered-key"></div>
+                </div>
+
+                <!-- Modal Tab Content 3: Summary -->
+                <div id="modal-tab-summary" class="modal-tab-pane">
+                    <div class="summary-card-container">
+                        <p class="summary-paragraph" id="modal-rendered-summary"></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button class="btn btn-danger" id="btn-delete-modal-note"><i class="fa-solid fa-trash-can"></i> Delete Note</button>
+                <div class="modal-footer-right">
+                    <button class="btn btn-text" id="btn-copy-modal"><i class="fa-regular fa-copy"></i> Copy</button>
+                    <div class="dropdown-wrapper">
+                        <button class="btn btn-secondary dropdown-trigger" id="btn-modal-download-dropdown">
+                            <i class="fa-solid fa-download"></i> Download <i class="fa-solid fa-chevron-down"></i>
+                        </button>
+                        <div class="dropdown-menu" id="modal-download-dropdown-menu">
+                            <button class="dropdown-item" id="btn-modal-download-txt">
+                                <i class="fa-regular fa-file-lines"></i> Text File (.txt)
+                            </button>
+                            <button class="dropdown-item" id="btn-modal-download-pdf">
+                                <i class="fa-regular fa-file-pdf"></i> PDF Document (.pdf)
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Print styling container for PDF prints -->
+    <div id="print-container" class="print-container"></div>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <span class="logo-text">Note<span>Genius</span></span>
+                <p>AI-powered study helper for students seeking structure, efficiency, and clarity.</p>
+            </div>
+            <div class="footer-links">
+                <a href="#" id="footer-link-home">Home</a>
+                <a href="#" id="footer-link-generator">Generator</a>
+                <a href="#" id="footer-link-saved">My Notes</a>
+            </div>
+            <div class="footer-copyright">
+                &copy; 2026 NoteGenius. Built with Flask, SQLite, and Pure CSS.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Markdown Parser Library (marked.js via CDN) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/4.3.0/marked.min.js"></script>
+    
+    <!-- Custom Application Javascript -->
+    <script src="/static/js/app.js"></script>
+</body>
+</html>
